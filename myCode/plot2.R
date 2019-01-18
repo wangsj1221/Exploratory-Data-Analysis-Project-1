@@ -1,0 +1,11 @@
+# convert data and time to specific format
+data$Date <- as.Date(data$Date, format = '%d/%m/%Y')
+data$DateTime <- as.POSIXct(paste(data$Date, data$Time))
+# open device
+if(!file.exists('figures')) dir.create('figures')
+png(filename = './figures/plot2.png', width = 480, height = 480, units='px')
+# plot figure
+Sys.setlocale(category = "LC_ALL", locale = "english")
+with(data, plot(DateTime, Global_active_power, xlab = '', ylab = 'Global Active Power (kilowatt)', type = 'l'))
+# close device
+dev.off()
